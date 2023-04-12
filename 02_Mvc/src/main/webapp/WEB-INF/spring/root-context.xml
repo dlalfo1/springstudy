@@ -4,5 +4,15 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
+	
+	<!--  Spring Container에 등록할 Bean을 만드는 파일(Spring Bean Configuration File) - 1장에서 aap-context.xml 파일이랑 같음. -->
+	
+	<bean id="bbs1" class="com.gdu.app02.domain.Bbs">
+		<property name="bbsNo" value="1"></property>
+		<property name="title" value="도와주세요"></property>
+		<property name="createdAt" value="2023-04-12"></property>
+	</bean>
 		
+	<!--  2번째 Bean은 AppContext.java에 있습ㅂ니다. -->
+	
 </beans>

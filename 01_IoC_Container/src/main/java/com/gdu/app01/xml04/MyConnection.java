@@ -11,7 +11,9 @@ public class MyConnection {
 	private String user;
 	private String password;
 	
+	
 	// default constructor
+	
 	
 	// method(getter, setter, getConnection)
 	public Connection getConnection() {
