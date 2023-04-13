@@ -54,7 +54,11 @@
 		<h1>Dependency Injection</h1>
 		<div><a href="${contextPath}/bbs/detail.do">상세보기</a></div>
 		
-		
+		<!-- ---------------------------------------------------------------------- -->
+		<!-- PostController에서 확인합시다. -->
+		<h1>Redirect</h1>
+		<div><a href="${contextPath}/post/detail.do?name=이미래&age=31">상세보기</a></div>
+		<div><a href="${contextPath}/post/detail.me?name=이미래&age=31">상세보기</a></div>
 		
 		
 		
