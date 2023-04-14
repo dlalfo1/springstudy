@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -26,21 +27,37 @@ public class SecondController {
 		super();
 		this.secondService = secondService;					// 여기서 필드로 주입이 되는 것이다. 즉 SecondController에서 secondService 객체 사용 가능하다.
 	}
-
 	
-	@ResponseBody // 이걸 붙여줘야만 return의 secondService.execute1(request, response) 이 값이 jsp이름으로 해석되지 않는다.
-				  // 컨트롤러는 뷰리졸버랑 짝꿍이기 때문이다! 컨트롤러가 반환하는건 다 뷰리졸버가 해석하는데 그걸 막아주는거임.
-	@GetMapping(value="/second/bmi1", produces=MediaType.APPLICATION_JSON_VALUE) // MediaType.APPLICATION_JSON_VALUE는 "application/json"이다.
-	public BmiVO bmi1(HttpServletRequest request, HttpServletResponse response) {
-		
-		return secondService.execute1(request, response);
+	
+	@GetMapping(value="/second/bmi1", produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<BmiVO> bmi(HttpServletRequest request){
+		return secondService.execute1(request);
 		
 	}
 	
-	@ResponseBody
-	@GetMapping(value="/second/bmi2", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Map<String, Object> bmi2(BmiVO bmiVO){
-		return secondService.execute2(bmiVO);
+	
+	@GetMapping("/second/bmi2")	// produces가 없음에 주의합니다. (반환 객체 ResponseEntity에 Content-Type을 작성해서 보냅니다.)
+	public ResponseEntity<Map<String, Object>> bmi2(BmiVO bmiVO) { // 
+		return secondService.excute2(bmiVO);
+		
 	}
-
+	
+	/*
+		@ResponseBody // 이걸 붙여줘야만 return의 secondService.execute1(request, response) 이 값이 jsp이름으로 해석되지 않는다.
+					  // 컨트롤러는 뷰리졸버랑 짝꿍이기 때문이다! 컨트롤러가 반환하는건 다 뷰리졸버가 해석하는데 그걸 막아주는거임.
+		@GetMapping(value="/second/bmi1", produces=MediaType.APPLICATION_JSON_VALUE) // MediaType.APPLICATION_JSON_VALUE는 "application/json"이다.
+		public BmiVO bmi1(HttpServletRequest request, HttpServletResponse response) {
+			
+			return secondService.execute1(request, response);
+			
+		}
+		
+		@ResponseBody
+		@GetMapping(value="/second/bmi2", produces=MediaType.APPLICATION_JSON_VALUE)
+		public Map<String, Object> bmi2(BmiVO bmiVO){
+			return secondService.execute2(bmiVO);
+		}
+	*/
+	
+	
 }

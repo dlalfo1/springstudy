@@ -8,5 +8,8 @@
 		<!-- Spring Container에 등록된 Bean들 -->
 		<bean id="firstService" class="com.gdu.app03.service.FirstServiceImpl" />
 		<bean id="secondService" class="com.gdu.app03.service.SecondServiceImpl" />
+		<bean id="thirdService" class="com.gdu.app03.service.ThirdServiceImpl" />
+		<bean id="fourthService" class="com.gdu.app03.service.FourthServiceImpl" />
+		<bean id="fifthService" class="com.gdu.app03.service.FifthServiceImpl" />
 		
 </beans>
