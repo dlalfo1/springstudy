@@ -13,5 +13,5 @@ public interface BoardService {
 	public int modifyBoard(BoardDTO board);		// 수정하는 쿼리문 돌린 후 반환받는 건 1 or 0이다. (int 타입)
 	public int removeBoard(int board_no);		// 삭제하는 쿼리문 돌린 후 반환받는 건 1 or 0이다. (int 타입)
 											    // 삭제할 때도 번호만 있으면 되니까 매개변수로 번호 받아오기
-	
+
 }

@@ -13,11 +13,55 @@
 <script src="${contextPath}/resources/summernote-0.8.18-dist/summernote-lite.min.js"></script>
 <script src="${contextPath}/resources/summernote-0.8.18-dist/lang/summernote-ko-KR.min.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/summernote-0.8.18-dist/summernote-lite.min.css">
+<style>
+	tbody tr:hover {
+		background-color: beige;
+		cursor: pointer;
+	}
+</style>
+<script>
+	function fnDetail(n) {	// 목록을 클릭했을시 전달 받은 b.board_no값을 매개변수로 받아 이동시 파라미터에 전달해준다.
+		location.href='${contextPath}/board/detail.do?board_no=' + n;
+	}
+
+</script>
 </head>
 <body>
 
-	<a href="${contextPath}/board/list.do"></a>
-
+	<div>
+		<a href="${contextPath}/board/write.do">새글작성하기</a>
+	</div>
+	
+	<div>
+		<table border="1">
+			<thead>
+				<tr>
+					<td>제목</td>
+					<td>작성자</td>
+					<td>작성일자</td>
+				</tr>
+			</thead>
+			<tbody>
+				<c:if test="${empty boardList}"> <!-- boardList가 비어있다면 -->
+					<tr>
+						<td colspan="3">첫 게시글의 주인공이 되어 보세요!</td>	<!-- 첫 줄을 합쳐서 메세지를 띄워준다. -->
+					</tr>
+				</c:if>
+				<c:if test="${not empty boardList}"> <!-- boardList가 비어있지 않다면 아래 태그를 실행한다. -->
+					<c:forEach items="${boardList}" var="b"> <!-- items에는 List<BoardDTO>가 담겨있고, b는 BoardDTO 객체 하나를 의미한다. -->
+						<tr onclick="fnDetail(${b.board_no})">
+							<td>${b.title}</td>		<!-- b.getTitle()을 의미한다. -->
+							<td>${b.writer}</td>	
+							<td>${b.created_at}</td>	
+							<td>${b.modified_at}</td>	
+						</tr>					
+					</c:forEach>
+				</c:if>
+			</tbody>
+		</table>
+	</div>
+	
+	
 
 
 
