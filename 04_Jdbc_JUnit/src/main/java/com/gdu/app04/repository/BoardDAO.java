@@ -97,9 +97,9 @@ public class BoardDAO {
 			con = getConnection(); 
 			sql = "INSERT INTO BOARD VALUES(BOARD_SEQ.NEXTVAL, ?, ?, ?, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'), TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI:SS'))";
 			ps = con.prepareStatement(sql);
-			ps.setNString(1, board.getTitle());
-			ps.setNString(2, board.getContent());
-			ps.setNString(3, board.getWriter());
+			ps.setString(1, board.getTitle());
+			ps.setString(2, board.getContent());
+			ps.setString(3, board.getWriter());
 			result = ps.executeUpdate();
 		} catch(Exception e) {
 			e.printStackTrace();

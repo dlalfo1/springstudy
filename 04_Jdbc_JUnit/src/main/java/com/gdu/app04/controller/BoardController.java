@@ -88,8 +88,8 @@ public class BoardController {
 		// 수정을 끝낸후엔 수정된 글을 봐야하니 상세보기로 다시 이동하는 것이다.
 		
 	}
-	 
 	
+
 	
 	
 	

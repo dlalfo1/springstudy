@@ -53,7 +53,6 @@
 							<td>${b.title}</td>		<!-- b.getTitle()을 의미한다. -->
 							<td>${b.writer}</td>	
 							<td>${b.created_at}</td>	
-							<td>${b.modified_at}</td>	
 						</tr>					
 					</c:forEach>
 				</c:if>

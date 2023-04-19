@@ -39,16 +39,21 @@
 	<!--  3. location -->
 	<div>
 		<button onclick="fnMove()">보내기</button> <!-- <form>밖에 있는 <button>은 아무 수행도 하지 않는 버튼이다.  -->
-		<script>
+		<script>3
 			function fnMove(){
 				location.href='${contextPath}/detail.do?boardNo=1&title=제목';
 			}
 		</script>
 	</div>
-
-
-
-
+	
+	<hr>
+	
+	<div>
+		<a href="${contextPath}/board/detail1.do?boardNo=10">상세요청1</a>
+		<a href="${contextPath}/board/detail2.do?boardNo=11">상세요청2</a>
+		<a href="${contextPath}/board/detail3.do?boardNo=12">상세요청3</a>
+		<a href="${contextPath}/board/list.do">목록</a>
+	</div>
 
 
 </body>
