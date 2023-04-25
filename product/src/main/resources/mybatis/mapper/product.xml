@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace는 @Mapper를 지정한다. -->
+<mapper namespace="com.gdu.prd.mapper.ProductMapper">
+
+	<select id="getProductList" resultType="ProductDTO">
+		SELECT PROD_NO, PROD_NAME, PROD_PRICE, PROD_MADE_AT
+		  FROM PRODUCT
+		 ORDER BY PROD_NO DESC	
+	</select>
+	
+	<select id="getProductCount" resultType="int">
+		SELECT COUNT(*)
+		  FROM PRODUCT
+	</select>
+	
+	<!--  서비스에서 String prodName, int prodPrice 이렇게 파라미터를 두가지 타입으로 보내줄건데 이럴 땐 parameterType을 적지 않으면 된다. -->
+	<!-- 대신 변수처리할 땐  String prodName, int prodPrice 이렇게 넘겨받는 순서대로 오기 때문에 param1, param2로 처리한다. -->
+	<insert id="addProduct" parameterType="ProductDTO">
+		INSERT INTO PRODUCT
+			(PROD_NO, PROD_NAME, PROD_PRICE, PROD_MADE_AT)
+		VALUES
+			(PRODUCT_SEQ.NEXTVAL, #{prodName}, #{prodPrice}, SYSDATE)
+	</insert>
+	
+	<!-- 변수처리할 때 #{} 이건 따옴표('')를 붙여주겠다는 소리다. 예를 들어 들어가는 값이 '1' 이렇게 되는거임. -->
+	<!-- WHERE PROD_NO = '2' 쿼리문이 이t렇게 되면 오라클 내부에서 문자열 '2'를 알아서 NUMBER타입으로 바꿔준다. -->
+	<!-- 그러니까 문자 숫자 나눠서 #, $  쓸 필요 없다. $는 다른 용도로 사용할것이다. -->
+	<select id="getProductByNo" parameterType="int" resultType="ProductDTO">
+   		SELECT PROD_NO, PROD_NAME, PROD_PRICE, PROD_MADE_AT
+		  FROM PRODUCT
+	     WHERE PROD_NO = #{prodNo}
+	</select>
+	
+
+</mapper>
