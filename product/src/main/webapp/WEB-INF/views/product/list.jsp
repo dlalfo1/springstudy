@@ -67,6 +67,7 @@
 			<ul class="product">
 				<li>제품번호 <span>${product.prodNo}</span></li>
 				<li>제품이름 ${product.prodName}</li>
+				<li><a href="${contextPath}/product/delete.do?prodNo=${product.prodNo}">제품삭제하기</a></li>
 			</ul>	
 			<hr>
 		</c:forEach>

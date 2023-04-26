@@ -17,6 +17,10 @@
 		<h3>제품 편집 화면</h3>
 		<form method="post" action="${contextPath}/product/modify.do">
 			<div>
+				<label for="prodNo">제품번호</label>
+				<input id="prodNo" name="prodNo" value="${productDTO.prodNo}" readonly="readonly">
+			</div>
+			<div>
 				<label for="prodName">제품이름</label>
 				<input id="prodName" name="prodName" value="${productDTO.prodName}">
 			</div>
@@ -25,11 +29,15 @@
 				<input id="prodPrice" name="prodPrice" value="${productDTO.prodPrice}">
 			</div>
 			<div>
-				<button>제품정보 수정하기</button>
+				<label for="prodMadeAt">제조일자</label>
+				<input id="prodMadeAt" name="prodMadeAt" value="${productDTO.prodMadeAt}" readonly="readonly">
+			</div>
+			<div>
+				<button>제품정보수정하기</button>
 				<input type="reset" value="초기화">
 			</div>
 		</form>
 	</div>
-
+	
 </body>
 </html>

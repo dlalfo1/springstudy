@@ -38,14 +38,29 @@ public class ProductController {
 	}
 	
 	@GetMapping("/detail.do")
-	public String detail(@RequestParam(value="prodNo", required = false, defaultValue = "0") int prodNo, Model model) {
+	public String detail(@RequestParam(value="prodNo", required = false, defaultValue = "0") int prodNo,	 Model model) {
 		productService.loadProduct(prodNo, model);
 		return "product/detail";
 	}
 	
 	@PostMapping("/edit.do")
-	public String edit(ProductDTO product) {	// 왕 중요! 객체로 파라미터를 받으면 Model을 사용하지 않아도 자동으로 forward된다.
+	public String edit(ProductDTO productDTO) {	// 왕 중요! 객체로 파라미터를 받으면 Model을 사용하지 않아도 자동으로 forward된다.
 		return "product/edit";
 	}
+	
+	@PostMapping("/modify.do")
+	public String modify(ProductDTO productDTO, RedirectAttributes redirectAttributes) {
+		int modifyResult = productService.modifyProduct(productDTO);
+		redirectAttributes.addFlashAttribute("modifyResult", modifyResult);
+		return "redirect:/product/detail.do?prodNo=" + productDTO.getProdNo();
+	}
+	
+	@GetMapping("/delete.do")
+	public String delete(@RequestParam(value="prodNo", required=false, defaultValue="0") int prodNo, RedirectAttributes redirectAttributes) {
+		int deleteResult = productService.deleteProduct(prodNo);
+		redirectAttributes.addFlashAttribute("deleteResult", deleteResult);
+		return "redirect:/product/list.do";
+	}
+	
 
 }

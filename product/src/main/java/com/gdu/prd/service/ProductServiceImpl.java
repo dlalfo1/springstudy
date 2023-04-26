@@ -30,4 +30,18 @@ public class ProductServiceImpl implements ProductService {
 		ProductDTO productDTO = productMapper.getProductByNo(prodNo);
 		model.addAttribute("productDTO", productDTO);
 	}
+	
+	@Override
+	public int modifyProduct(ProductDTO productDTO) {
+		int modifyResult = productMapper.modifyProduct(productDTO);
+		return modifyResult;
+	}
+	
+	@Override
+	public int deleteProduct(int prodNo) {
+		int deleteResult = productMapper.deleteProduct(prodNo);
+		return deleteResult;
+	}
+	
 }
+	

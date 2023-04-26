@@ -1,6 +1,8 @@
 package com.gdu.app09.controller;
 
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gdu.app09.service.EmployeeListService;
 
@@ -20,7 +23,6 @@ public class EmployeeController {
 	
 	@GetMapping("/employees/pagination.do")
 	public String pagination(HttpServletRequest request, Model model) {
-		
 		employeeListService.getEmployeeListUsingPagination(request, model);
 		return "employees/pagination";
 		
@@ -52,5 +54,22 @@ public class EmployeeController {
 														   // /change/record.do 하기전에 니가 보고 있던 페이지로 돌아가라.
 		
 	}
-
+	@GetMapping("/employees/scroll.page")
+	public String scrollPage() {
+		return "employees/scroll";
+	}
+	
+	@GetMapping(value="/employee/scroll.do", produces="application/json")
+	@ResponseBody	// 응답해주는게 jsp이름이 아니라 응답본문이란걸 알려주기 위한 애너테이션
+	public Map<String, Object> scroll(HttpServletRequest request){ 
+		return employeeListService.getEmployeeListUsingScroll(request);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }

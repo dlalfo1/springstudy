@@ -22,6 +22,14 @@
 		// Scope 키워드 붙여서 가져오는게 제일 정확하다.
 		let recordPerPage = '${sessionScope.recordPerPage}' == '' ? '10' : '${sessionScope.recordPerPage}';
 		$('#recordPerPage').val(recordPerPage);
+		// 제목을 클릭하면 정렬 방식을 바꿈
+		// 현재 정렬상태가 오름차순이면 내림차순으로, 내림차순이면 오름차순으로 바꿔줘야 한다.
+		// 즉, pagination은 현재 정렬상태가 무엇인지 알고 있어야 한다. 그런 후 앞으로 해야할 정렬상태를 넘기는 것이다.
+		// 또한 현재 페이지가 몇 페이지인지에 대한 정보가 필요하다.
+		
+		$('.title').on('click', function() {
+			location.href = '${contextPath}/employees/pagination.do?column=' + $(this).data('column') + '&order=' + $(this).data('order') + '&page=' + ${page}
+		})
 	})
 
 </script>
@@ -43,6 +51,21 @@
 	.link {
 		
 	}
+	table {
+		width: 1500px;
+	}
+	table td:nth-of-type(1) { width: 200px }
+	table td:nth-of-type(2) { width: 200px }
+	table td:nth-of-type(3) { width: 300px }
+	table td:nth-of-type(4) { width: 200px }
+	table td:nth-of-type(5) { width: 350px }
+	table td:nth-of-type(6) { width: 200px }
+	table td:nth-of-type(7) { width: 350px }
+	table td:nth-of-type(8) { width: 200px }
+	table td:nth-of-type(9) { width: 200px }
+	table td:nth-of-type(10) { width: 200px }
+	table td:nth-of-type(11) { width: 200px }
+	table td:nth-of-type(12) { width: 350px }
 </style>
 
 </head>
@@ -66,23 +89,24 @@
 			<thead>
 				<tr>	
 					<td>순번</td>
-					<td>사원번호</td>
-					<td>사원명</td>
-					<td>이메일</td>
-					<td>전화번호</td>
-					<td>입사일자</td>
-					<td>직업</td>
-					<td>연봉</td>
-					<td>커미션</td>
-					<td>매니저</td>
-					<td>부서번호</td>
-					<td>부서명</td>
+					<!-- 태그에 속성을 부여하는 data- 속성 -->
+					<td><span class="title" data-column="E.EMPLOYEE_ID" data-order="${order}">사원번호</span></td>
+					<td><span class="title" data-column="E.FIRST_NAME" data-order="${order}">사원명</span></td>
+					<td><span class="title" data-column="E.EMAIL" data-order="${order}">이메일</span></td>
+					<td><span class="title" data-column="E.PHONE_NUMBER" data-order="${order}">전화번호</span></td>
+					<td><span class="title" data-column="E.HIRE_DATE" data-order="${order}">입사일자</span></td>
+					<td><span class="title" data-column="E.JOB_ID" data-order="${order}">직업</span></td>
+					<td><span class="title" data-column="E.SALARY" data-order="${order}">연봉</span></td>
+					<td><span class="title" data-column="E.COMMISSION_PCT" data-order="${order}">커미션</span></td>
+					<td><span class="title" data-column="E.MANAGER_ID" data-order="${order}">매니저</span></td>
+					<td><span class="title" data-column="E.DEPARTMENT_ID" data-order="${order}">부서번호</span></td>
+					<td><span class="title" data-column="D.DEPARTMENT_NAME" data-order="${order}">부서명</span></td>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${employees}" var="emp" varStatus="vs"> <!-- varStatus : 인덱스를 사용하고 싶으면 이 속성을 부여해야한다. -->
 					<tr>
-						<td>${vs.index}</td> <!-- .index키워드로 인덱스를 꺼내올 수 있다. -->
+						<td>${beginNo - vs.index}</td> <!-- .index키워드로 인덱스를 꺼내올 수 있다. -->
 						<td>${emp.employeeId}</td>
 						<td>${emp.firstName} ${emp.lastName}</td>
 						<td>${emp.email}</td>

@@ -73,6 +73,15 @@ public class PageUtill {
 	
 	public String getPagination(String path) { // 매개변수로 path를 선언해서 서비스의 경로를 모듈화해준다. 
 		   									   // 이렇게 해주면 서비스에서 해당 경로만 넣어주면 된다.
+											  
+		 // path에 물음표(?), 즉 파라미터가 붙어있는지 확인해야한다.
+		 // path에 ?가 포함되어 있으면 이미 파라미터가 포함된 경로이므로 &를 붙여서 page 파라미터를 추가한다.
+		
+		if(path.contains("?")) { // path에 물음표(?)가 포함되어있다면.
+			path += "&";		 // path = "/app09/employees/pagination.do?order=ASC&"
+		} else {
+			path += "?";		 // path = "/app09/employees/pagination.do?"
+		}
 		
 		StringBuilder sb = new StringBuilder();
 		
@@ -84,7 +93,7 @@ public class PageUtill {
 			sb.append("<span class=\"hidden\">◀</span>");
 			
 		} else {
-			sb.append("<a class=\"link\" href=\"" + path + "?page=" + (beginPage -1) + "\">◀</a>");
+			sb.append("<a class=\"link\" href=\"" + path + "page=" + (beginPage -1) + "\">◀</a>");
 		}
 		
 		
@@ -93,7 +102,7 @@ public class PageUtill {
 			if(p == page) {
 				sb.append("<span class=\"strong\">" + p + "</span>");
 			} else {
-				sb.append("<a class=\"link\" href=\"" + path + "?page=" + p + "\">" + p + "</a>");
+				sb.append("<a class=\"link\" href=\"" + path + "page=" + p + "\">" + p + "</a>");
 			}
 		}
 		
@@ -102,7 +111,7 @@ public class PageUtill {
 			sb.append("<span class=\"hidden\">▶</span>");
 			
 		} else {
-			sb.append("<a class=\"link\" href=\"" + path + "?page=" + (endPage + 1) + "\">▶</a>");
+			sb.append("<a class=\"link\" href=\"" + path + "page=" + (endPage + 1) + "\">▶</a>");
 		}
 		
 		sb.append("</div>");

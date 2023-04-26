@@ -11,6 +11,7 @@ import com.gdu.app09.domain.EmpDTO;
 public interface EmployeeListMapper {
 	public int getEmployeeCount(); // 전체 개수 구하는용도라 전달할 매개변수 X
 	public List<EmpDTO> getEmployeeListUsingPagination(Map<String, Object> map);
+	public List<EmpDTO> getEmployeeListUsingScroll(Map<String, Object> map);
 	
 	
 	

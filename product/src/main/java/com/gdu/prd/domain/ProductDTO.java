@@ -1,5 +1,7 @@
 package com.gdu.prd.domain;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +14,6 @@ public class ProductDTO {
 	private int prodNo;
 	private String prodName;
 	private int prodPrice;
-	private DATE prodMadeAt;
+	private Date prodMadeAt;
 }
 
