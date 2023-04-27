@@ -12,7 +12,7 @@
 	</appender>
 	
 	<!-- Application Loggers : com.gdu.app10 패키지는 debug 수준의 로그 레벨을 가진다. -->
-	<logger name="com.gdu.app09">
+	<logger name="com.gdu.app10">
 		<level value="debug" />
 	</logger>
 	

@@ -153,10 +153,82 @@ public class EmployeeListServiceImpl implements EmployeeListService {
 		 	}	
 		*/
 		
+	}
+	
+	@Override
+	public void getEmployeeListUsingSearch(HttpServletRequest request, Model model) {
+
+		// 파라미터 column이 전달되지 않는 경우 column=""(빈문자열)로 처리한다.
+		// ${contextPath}/employees/search.do 이런식으로만 전달할경우 column값이 없으니 null값 처리를 해줘야한다.
+		Optional<String> opt1 = Optional.ofNullable(request.getParameter("column"));
+		String column = opt1.orElse(""); 
 		
+		// 파라미터 query가 전달되지 않는 경우 query=""(빈문자열)로 처리한다.
+		// ${contextPath}/employees/search.do 이런식으로만 전달할경우 query값이 없으니 null값 처리를 해줘야한다.
+		Optional<String> opt2 = Optional.ofNullable(request.getParameter("query"));
+		String query = opt2.orElse(""); 
 		
+		// DB로 보낼 Map 만들기 (column + query)
+		Map<String, Object> map = new HashMap <String, Object>();
+		map.put("column", column);
+		map.put("query", query);
 		
+		// 파라미터 page가 전달되지 않은 경우 page=1로 처리한다.
+		Optional<String> opt3 = Optional.ofNullable(request.getParameter("page"));
+		int page = Integer.parseInt(opt3.orElse("1"));
 		
+		// column과 query를 이용해 검색된 레코드 개수를 구한다.
+		int totalRecord = employeeListMapper.getEmployeeSearchCount(map);
+		
+		// recordPerPage=10으로 처리한다.
+		int recordPerPage = 10;
+		
+		// PageUtil(Pagination에 필요한 모든 정보) 계산하기
+		pageUtill.setPageUtil(page, totalRecord, recordPerPage);
+		
+		// DB로 보낼 Map에 begin, end 추가하기
+		map.put("begin", pageUtill.getBegin());
+		map.put("end", pageUtill.getEnd());
+		
+		// begin ~ end 사이의 목록 가져오기
+		List<EmpDTO> employees = employeeListMapper.getEmployeeListUsingSearch(map);
+		
+		// search.jsp로 전달할(forward) 정보 저장하기
+		model.addAttribute("employees", employees);
+		
+		// column과 query 파라미터를 넘겨줘야 페이지가 바뀌어도 검색한 문자가 유지된다.
+		model.addAttribute("pagination", pageUtill.getPagination(request.getContextPath() + "/employees/search.do?column=" + column + "&query=" + query));
+		model.addAttribute("beginNo", totalRecord - (page - 1) * recordPerPage);
+		
+	}
+	
+	@Override
+	public Map<String, Object> getAutoComplete(HttpServletRequest request) {
+		
+		// 파라미터 column이 전달되지 않는 경우 column=""(빈문자열)로 처리한다.
+		// ${contextPath}/employees/search.do 이런식으로만 전달할경우 column값이 없으니 null값 처리를 해줘야한다.
+		Optional<String> opt1 = Optional.ofNullable(request.getParameter("column"));
+		String column = opt1.orElse(""); 
+		
+		// 파라미터 query가 전달되지 않는 경우 query=""(빈문자열)로 처리한다.
+		// ${contextPath}/employees/search.do 이런식으로만 전달할경우 query값이 없으니 null값 처리를 해줘야한다.
+		Optional<String> opt2 = Optional.ofNullable(request.getParameter("query"));
+		String query = opt2.orElse(""); 
+		
+		// DB로 보낼 Map 만들기 (column + query)
+		Map<String, Object> map = new HashMap <String, Object>();
+		map.put("column", column);
+		map.put("query", query);
+		
+		// 검색 결과 목록 가져오기
+		List<EmpDTO> employees = employeeListMapper.getAutoComplete(map);
+		
+		// search.jsp로 응답할 데이터
+		Map<String, Object> resultMap = new HashMap <String, Object>(); 
+		resultMap.put("employees", employees);
+		
+		// 응답
+		return resultMap;
 		
 	}
 

@@ -2,7 +2,6 @@
 
 <configuration scan="true" scanPeriod="30 seconds">
 
-
 	<!-- Console 화면에 로그를 찍는 console Appender -->
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
@@ -12,13 +11,12 @@
 		</encoder>
 	</appender>
 	
-	
-	<!-- Application Loggers : com.gdu.app05 패키지는 debug 수준의 로그 레벨을 가진다. -->
+	<!-- Application Loggers : com.gdu.app10 패키지는 debug 수준의 로그 레벨을 가진다. -->
 	<logger name="com.gdu.app09">
 		<level value="debug" />
 	</logger>
 	
-	<!-- 3rdparty Loggers : Spring Framework가 info 수준의 로그 레벨을 가진다. -->
+	<!-- 3rdparty Loggers : 외부 라이브러리는 info 수준의 로그 레벨을 가진다. -->
 	<logger name="org.springframework.core">
 		<level value="info" />
 	</logger>
@@ -29,6 +27,21 @@
 		<level value="info" />
 	</logger>
 	<logger name="org.springframework.web">
+		<level value="info" />
+	</logger>
+	<logger name="org.springframework.jndi">
+		<level value="info" />
+	</logger>
+	<logger name="org.springframework.ui">
+		<level value="info" />
+	</logger>
+	<logger name="org.apache.ibatis">
+		<level value="info" />
+	</logger>
+	<logger name="org.mybatis.spring">
+		<level value="info" />
+	</logger>
+	<logger name="com.zaxxer.hikari">
 		<level value="info" />
 	</logger>
 

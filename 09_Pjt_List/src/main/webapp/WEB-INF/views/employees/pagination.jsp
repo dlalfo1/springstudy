@@ -49,30 +49,21 @@
 		font-weight: 900;
 	}
 	.link {
-		
+		color: orange;
 	}
 	table {
 		width: 1500px;
 	}
-	table td:nth-of-type(1) { width: 200px }
-	table td:nth-of-type(2) { width: 200px }
+	table td:nth-of-type(1) { width: 100px }
+	table td:nth-of-type(2) { width: 150px }
 	table td:nth-of-type(3) { width: 300px }
-	table td:nth-of-type(4) { width: 200px }
-	table td:nth-of-type(5) { width: 350px }
-	table td:nth-of-type(6) { width: 200px }
-	table td:nth-of-type(7) { width: 350px }
-	table td:nth-of-type(8) { width: 200px }
-	table td:nth-of-type(9) { width: 200px }
-	table td:nth-of-type(10) { width: 200px }
-	table td:nth-of-type(11) { width: 200px }
-	table td:nth-of-type(12) { width: 350px }
 </style>
 
 </head>
 <body>
 
 	<div>
-		<a href="${contextPath}/employees/serarch.form">사원 조회 화면으로 이동</a>	
+		<a href="${contextPath}/employees/search.do">사원 조회 화면으로 이동</a>	
 	</div>
 	
 	<div>
