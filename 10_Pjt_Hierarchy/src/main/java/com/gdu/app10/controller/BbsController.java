@@ -46,4 +46,11 @@ public class BbsController {
 		return "redirect:/bbs/list.do";
 	}
 	
+	@PostMapping("/reply/add.do")
+	public String replyAdd(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+		int addReplyResult = bbsService.addReply(request);
+		redirectAttributes.addFlashAttribute("addReplyResult",addReplyResult);
+		return "redirect:/bbs/list.do";
+	}
+	
 }
