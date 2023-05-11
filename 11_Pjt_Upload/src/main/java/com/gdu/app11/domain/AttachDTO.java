@@ -6,7 +6,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@AllArgsConstructor 
 public class AttachDTO {
 	private int attachNo;
 	private String path;
@@ -15,5 +15,7 @@ public class AttachDTO {
 	private int downloadCount;
 	private int hasThumbnail;
 	private int uploadNo;
+	private UploadDTO uploadDTO;
+	
 	
 }

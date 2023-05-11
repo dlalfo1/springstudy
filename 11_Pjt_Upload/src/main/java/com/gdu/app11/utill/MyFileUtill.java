@@ -44,6 +44,23 @@ public class MyFileUtill {
 		// 랜덤으로 UUID를 부여하고 String으로 변환하고 하이픈(-)을 빈문자열로 변환한다.
 			
 		return UUID.randomUUID().toString().replaceAll("-", "") + "." + extName; 
-
 }
+
+	// String tempPath 만들기(임시경로)
+	public String getTempPath() {
+		return "/storage" + seq + "temp";
+	}
+
+	// String tempfileName 만들기 (zip 파일)
+	public String getTempfileName() {
+		return UUID.randomUUID().toString().replaceAll("-", "") + ".zip"; 
+	}
+	
+	// String yesterdayPath 만들기
+	public String getYesterdayPath() {
+		LocalDate date = LocalDate.now();
+		date.minusDays(1);	// 1일 전
+		return "/storage" + seq + date.getYear() + seq + String.format("%02d", date.getMonthValue()) + seq + String.format("%02d", date.getDayOfMonth());
+	}
+
 }

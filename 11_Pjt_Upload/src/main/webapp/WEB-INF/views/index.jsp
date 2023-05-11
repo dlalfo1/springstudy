@@ -17,5 +17,9 @@
 		<a href="${contextPath}/upload/list.do">UPLOAD</a>
 	</div>
 	
+	<div>
+		<a href="${contextPath}/upload/pagination.do">페이징 구현해보기</a>
+	</div>
+	
 </body>
 </html>
