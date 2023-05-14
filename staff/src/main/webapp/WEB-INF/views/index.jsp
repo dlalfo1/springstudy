@@ -10,7 +10,75 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="${contextPath}/resources/js/lib/jquery-3.6.4.min.js"></script>
+<script>
+	
+	$(function(){
+		fnList();
+	})
+	
+	function fnList() {
+		$.ajax({
+			type: 'get',
+			url: '${contextPath}/list.json',
+			dataType: 'json',
+			success: function(resData){	// resData = [ {}, {}, {} ]
+				$('#staffList').empty(); // 반복문 돌리기 전에 먼저 테이블의 내용을 비워줘야 한다. (이 작업을 수행하지 않으면 테이블에 데이터가 계속 누적됨.)
+				$.each(resData, function(i, staff){
+					let str = '<tr>';
+					str += '<td>' + staff.sno;
+					str += '<td>' + staff.name;
+					str += '<td>' + staff.dept;
+					str += '<td>' + staff.salary;
+					$('#staffList').append(str);
+				})
+			}
+		})
+	}
+	
+	function fnAdd() {
+		$.ajax({
+			type: 'post',
+			url: '${contextPath}/add.do',
+			data: $('#frm_add').serialize(), // <form>태그 안에 있는 name속성이 전부 파라미터로 넘어간다.
+			dataType: 'text',
+			success: function(resData){	// resData : 사원 등록이 성공했습니다.
+				alert(resData);
+				fnList();	// 사원목록 갱신
+				$('#sno').val();	// 등록시 입력한 정보 지워주기.
+				$('#name').val();
+				$('#salary').val();
+				
+			},
+			error: function(jqXHR){  // jqXHR.responseText : 사원 등록이 실패했습니다.
+				alert(jqXHR.responseText);
+			}
+		})
+	}
+	
+	function fnSearch() {
+		$.ajax({
+			type: 'get',
+			url: '${contextPath}/query.json?query=' + $('#query').val(),
+			data: $('#frm_search').serialize(),
+			dataType: 'json',
+			success: function(resData){
+				$('#staffList').empty();
+				let str = '<tr>';
+				str += '<td>' + resData.sno;
+				str += '<td>' + resData.name;
+				str += '<td>' + resData.dept;
+				str += '<td>' + resData.salary;
+				$('#staffList').append(str);
+				
+			}, error: function(jqXHR){  
+					alert('조회된 사원 정보가 없습니다.');
+				}
+			
+		})
+		
+	}
 
+</script>
 </head>
 <body>
 

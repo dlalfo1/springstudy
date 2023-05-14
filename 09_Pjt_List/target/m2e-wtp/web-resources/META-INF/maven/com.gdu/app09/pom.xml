@@ -14,12 +14,6 @@
 		<org.slf4j-version>1.7.30</org.slf4j-version>
 	</properties>
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
-		<dependency>
-		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
-		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
-		    <version>1.16</version>
-		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
@@ -102,6 +96,12 @@
 		    <groupId>ch.qos.logback</groupId>
 		    <artifactId>logback-classic</artifactId>
 		    <version>1.2.3</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1 -->
+		<dependency>
+		    <groupId>org.bgee.log4jdbc-log4j2</groupId>
+		    <artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
+		    <version>1.16</version>
 		</dependency>
 		
 		<!-- @Inject -->

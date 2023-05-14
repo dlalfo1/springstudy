@@ -12,4 +12,5 @@ public class StaffDTO {
 	private String name;
 	private String dept;
 	private int salary;
+	// 안녕
 }

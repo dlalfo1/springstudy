@@ -4,8 +4,10 @@
 
 	<!-- Console 화면에 로그를 찍는 console Appender -->
 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
-		<encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-			<layout class="com.gdu.app09.logback.MyLogbackLayout" />
+		<encoder>
+			<pattern>
+				[%date{HH:mm:ss.SSS, Asia/Seoul}][%-5level][%logger] - %msg%n
+			</pattern>
 		</encoder>
 	</appender>
 	
