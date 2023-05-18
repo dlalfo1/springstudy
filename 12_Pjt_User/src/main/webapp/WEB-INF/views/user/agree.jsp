@@ -11,10 +11,52 @@
 <title>Insert title here</title>
 <script src="${contextPath}/resources/js/lib/jquery-3.6.4.min.js"></script>
 <script>
-  function fnBack(){
-    history.back();
+
+  // 취소하면 이전 페이지로 돌아간다.
+  function fnCancle(){
+	  $('#btnCancle').on('click', function(){
+      history.back();
+	  })
   }
-</script>
+
+  // 모두 동의
+  function fnCheckAll(){
+	  $('#checkAll').on('click', function (){
+		  
+	  });
+  }
+  
+  // 개별 선택
+  function fnCheckOne() {
+	  $('#checkOne').on('click', function(){
+		  
+	  });
+  }
+  
+  // 가입 페이지로 이동하기(frmAgree submit)
+  function fnFrmAgreeSubmit() {
+	  $('#frmAgree').on('submit', function(){
+		  
+		  // 필수 약관에 동의하지 않으면 이벤트 실행X (이 코드는 자주 사용된다.)
+		  if($('#service').is(':checked') == false || $('#privacy').is(':checked') == false){
+			  alert('필수 약관에 동의해야만 가입할 수 있습니다.');
+			  event.preventDefault();
+			  return;
+		  }
+		  
+	  })
+  }
+
+  // 함수 호출
+  $(function(){
+    fnCancle();
+    fnCheckAll();
+    fnCheckOne();
+    fnFrmAgreeSubmit();
+  })
+  
+  
+  </script>
 </head>
 <body>
 
@@ -22,7 +64,7 @@
   
     <h1>약관 동의하기</h1>
     
-    <form id="frmAgree" action="${contextPath}/user/join.jsp">
+    <form id="frmAgree" action="${contextPath}/user/join.form">
     
       <div>
         <input type="checkbox" id="checkAll">
@@ -31,8 +73,9 @@
       
       <hr>
       
+      <!-- 필수인 애들은 name속성을 따로 주지 않았고, 이벤트와 위치 동의는 name속성을 주고 파라미터로 넘긴다. -->
       <div>
-        <input type="checkbox" id="service">
+        <input type="checkbox" id="service" class="checkOne">
         <label for="service" >이용약관 동의(필수)</label>
         <div>
           <textarea>본 약관은 ...</textarea>
@@ -40,7 +83,7 @@
       </div>
       
       <div>
-        <input type="checkbox" id="privacy">
+        <input type="checkbox" id="privacy" class="checkOne">
         <label for="privacy">개인정보수집 동의(필수)</label>
         <div>
           <textarea>개인정보보호법에 따라 ...</textarea>
@@ -48,7 +91,15 @@
       </div>
       
       <div>
-        <input type="checkbox" id="location" name="location" >
+       <!-- 
+          1. 체크한 경우 : 파라미터 location이 on값을 가지고 전달된다.
+          2. 체크 안 한 경우 : 파라미터 location이 전달되지 않는다.
+       -->
+
+      <!-- 체크박스에 value속성이 없을 때, 체크하면 on이라는 파라미터의 값으로 넘어간다. loacation:on -->
+      <!-- 체크하지 않으면 name="location" 파라미터가 아예 넘어가지 않는다.
+           파라미터 location은 필수가 아니다.! -->
+        <input type="checkbox" id="location" name="location" class="checkOne">
         <label for="location">위치정보수집 동의(선택)</label>
         <div>
           <textarea>위치정보 ...</textarea>
@@ -56,7 +107,11 @@
       </div>
       
       <div>
-        <input type="checkbox" id="event" name="event">
+      <!-- 
+          1. 체크한 경우 : 파라미터 event가 on값을 가지고 전달된다.
+          2. 체크 안 한 경우 : 파라미터 event가 전달되지 않는다.
+       -->
+        <input type="checkbox" id="event" name="event" class="checkOne">
         <label for="event">이벤트 동의(선택)</label>
         <div>
           <textarea>이벤트 ...</textarea>
@@ -66,7 +121,7 @@
       <hr>
       
       <div>
-        <input type="button" value="취소" onclick="fnBack()">
+        <input type="button" value="취소" id="btnCancle">
         <button>다음</button>
       </div>
     

@@ -18,6 +18,9 @@
     <h1>로그인</h1>
     
     <form id="frmLogin" method="post" action="${contextPath}/user/login.do">
+    
+       <!-- 로그인 이후에 이동할 주소 -->
+      <input type="hidden" name="url" value="${url}">
       
       <div>
         <label for="id">아이디</label>

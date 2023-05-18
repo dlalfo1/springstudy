@@ -29,14 +29,14 @@ import org.springframework.stereotype.Component;
 */
 
 
-@PropertySource(value={"classpath:application.properties"}) 
+@PropertySource(value={"classpath:application.properties"})
 @Component
 public class JavaMailUtil {
-  
+
   @Autowired
   private Environment env;
   
-  public void sendJavaMail(String to, String title, String content) { // 받는 사람, 제목, 내용을 받아서 메일 보내주는 메소드
+  public void sendJavaMail(String to, String title, String content) {  // 받는 사람, 제목, 내용
     
     try {
       
@@ -46,22 +46,20 @@ public class JavaMailUtil {
       properties.put("mail.smtp.port", env.getProperty("spring.mail.port"));
       properties.put("mail.smtp.auth", env.getProperty("spring.mail.properties.mail.smtp.auth"));
       properties.put("mail.smtp.starttls.enable", env.getProperty("spring.mail.properties.mail.smtp.starttls.enable"));
-      
+     
       // 이메일을 보내는 계정 정보를 javax.mail.Session에 저장한다.
       MimeMessage message = new MimeMessage(Session.getInstance(properties, new Authenticator() {
-        
         @Override
         protected PasswordAuthentication getPasswordAuthentication() {
-          // TODO Auto-generated method stub
           return new PasswordAuthentication(env.getProperty("spring.mail.username"), env.getProperty("spring.mail.password"));
         }
-      }));      
+      }));
       
       // 이메일 만들기
-      message.setFrom(new InternetAddress(env.getProperty("spring.mail.username"), "사이트관리자"));
-      message.setRecipient(Message.RecipientType.TO, new InternetAddress(to)); // CC:참조, BC:숨은 참조
+      message.setFrom( new InternetAddress(env.getProperty("spring.mail.username"), "사이트관리자") );
+      message.setRecipient( Message.RecipientType.TO, new InternetAddress(to) );
       message.setSubject(title);
-      message.setContent(content, "text/html; charset=UTF-8");  // MIME-TYPE 적어줘야 함.
+      message.setContent(content, "text/html; charset=UTF-8");
       
       // 이메일 보내기
       Transport.send(message);
@@ -69,7 +67,6 @@ public class JavaMailUtil {
     } catch (Exception e) {
       e.printStackTrace();
     }
-    
     
   }
   

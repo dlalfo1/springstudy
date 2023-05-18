@@ -30,6 +30,7 @@ public class DBConfig {
 	private Environment env; // 스프링 컨테이너에 Environment Bean이 이미 들어가 있기 때문에 @Autowired 애터네이션으로 주입시킬 수 있다.
 	
 	
+	
 	// HikariConfig Bean - HikariDataSource Bean 만들기 전에 필요한 Bean
 	@Bean
 	public HikariConfig hikariConfig() {

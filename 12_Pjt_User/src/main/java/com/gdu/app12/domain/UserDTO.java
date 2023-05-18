@@ -17,20 +17,17 @@ public class UserDTO {
 	private String gender;
 	private String email;
 	private String mobile;
-	private String birthYear;
-	private String birthDate;
-	private String postCode;
+	private String birthyear;
+	private String birthdate;
+	private String postcode;
 	private String roadAddress;
 	private String jibunAddress;
 	private String detailAddress;
 	private String extraAddress;
-	private int agreeCode;
+	private int agreecode;
 	private Date joinedAt;
 	private Date pwModifiedAt;
 	private String autologinId;
 	private Date autologinExpiredAt;
 
-	
-	
-	
 }
