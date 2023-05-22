@@ -20,7 +20,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+	 
 	<context:component-scan base-package="com.gdu.app12" />
 	
 	<!-- interceptor가 동작할 mapping 등록(모든 인터셉터는 @Component로 Bean으로 등록한다.) -->
@@ -44,9 +44,14 @@
 	   <beans:bean class="com.gdu.app12.intercept.SleepUserCheckInterceptor" />
 	 </interceptor>
 	 
+	 <interceptor>
+	   <mapping path="/**"/>
+	   <beans:bean class="com.gdu.app12.intercept.Autologininterceptor" />
+	 </interceptor>
 	</interceptors>
 	
-	
-	
-	
+		
 </beans:beans>
+
+
+

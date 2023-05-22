@@ -27,7 +27,7 @@ public class UserDTO {
 	private int agreecode;
 	private Date joinedAt;
 	private Date pwModifiedAt;
-	private String autologinId;
+	private String autoLoginId;
 	private Date autologinExpiredAt;
 
 }

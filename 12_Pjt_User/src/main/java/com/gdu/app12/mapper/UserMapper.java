@@ -18,6 +18,9 @@ public interface UserMapper {
   public UserDTO selectUserByUserDTO(UserDTO userDTO);
   public int insertUserAccess(String id);
   public int updateUserAccess(String id);
+  public int insertAutoLogin(UserDTO userDTO);
+  public int deleteAutoLogin(String id);
+  public UserDTO selectAutologin(String autologinId);
   public int insertLeaveUser(LeaveUserDTO leaveUserDTO);
   public int deleteUser(String id);
   public int insertSleepUser();
