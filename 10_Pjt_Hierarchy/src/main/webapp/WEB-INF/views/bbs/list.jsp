@@ -43,7 +43,7 @@
 		
 		// 삭제 버튼 이벤트
 		$('.frm_remove').on('submit', function(event){
-			if(cofirm('BBS를 삭제할까요?') == false){
+			if(confirm('BBS를 삭제할까요?') == false){
 				event.preventDefault();
 				return;
 			}

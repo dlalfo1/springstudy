@@ -4,23 +4,23 @@ import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 
-@Getter 	// 값을 가져다 쓰기 위해서 선언
-			// Setter는 값을 수정할 여지가 생기기 때문에 제외
+@Getter   	// 값을 가져다 쓰기 위해서 선언
+			      // Setter는 값을 수정할 여지가 생기기 때문에 제외
 @Component  // Bean으로 만들어 스프링컨테이너에 보관한다.
 public class PageUtill {
-									// 여기서 레코드는 행의 개수이다. 즉 총 사원수 107개가 되는거임.
-	private int page;				// 현재 페이지 (파라미터로 받아온다.)
-	private int totalRecord;		// 전체 레코드 개수 (DB에서 구해온다.)
+                                // 여기서 레코드는 행의 개수이다. 즉 총 사원수 107개가 되는거임.
+	private int page;				      // 현재 페이지 (파라미터로 받아온다.)
+	private int totalRecord;	  	// 전체 레코드 개수 (DB에서 구해온다.)
 	private int recordPerPage;		// 한 페이지에 표시할 레코드 개수 (파라미터로 받아온다.)
-	private int begin;				// 한 페이지에 표시할 레코드의 시작 번호 (계산한다.)
-	private int end;				// 한 페이지에 표시할 레코드의 종료 번호 (계산한다.)
+	private int begin;			    	// 한 페이지에 표시할 레코드의 시작 번호 (계산한다.) - 행의 시작 번호
+	private int end;			      	// 한 페이지에 표시할 레코드의 종료 번호 (계산한다.) - 행의 마지막 번호
 	
-									// begin, end 값을 계산하려면 page, totalRecord, recordPerPage 값이 필요하다.
+	                              // begin, end 값을 계산하려면 page, totalRecord, recordPerPage 값이 필요하다.
 	
-	private int pagePerBlock = 5;   // 한 블록에 표시할 페이지의 개수 (임의로 정한다.)
+	private int pagePerBlock = 5; // 한 블록에 표시할 페이지의 개수 (임의로 정한다.)
 	private int totalPage;		    // 전체 페이지 개수 (계산한다.)
-	private int beginPage;		    // 한 블록에 표시할 페이지의 시작 번호 (계산한다.)
-	private int endPage;			// 한 블록에 표시할 페이지의 종료 번호 (계산한다.)
+	private int beginPage;		    // 한 블록에 표시할 페이지의 시작 번호 (계산한다.) - 하단 번호의 시작번호
+	private int endPage;			    // 한 블록에 표시할 페이지의 종료 번호 (계산한다.) - 하단 번호의 마지막번호
 	
 	public void setPageUtil(int page, int totalRecord, int recordPerPage) {
 		                                            
@@ -33,34 +33,41 @@ public class PageUtill {
 		
 		/*
 		 	totalRecord=26,	recordPerPage=5인 상황
-	 		page	begin	end
-	 		1       1		5
-	 		2		6		10
-	 		3		11		15
-	 		4		16		20
-	 		5		21		25
-	 		6		26		26
+	 	page	  begin	  end
+ 		  1       1		   5
+	 		2		    6		  10
+	 		3		    11		15
+	 		4		    16		20
+	 		5		    21		25
+	 		6		    26		26
 		*/
 		
+		/*
+		  1 = (1-0) * 5 + 1;
+		  5  = 1 + 5 - 1
+		  if(5 > 16) {
+		    end = 5;
+		
+		*/
 		begin = (page -1) * recordPerPage + 1;
 		end = begin + recordPerPage - 1;	// 이 계산식으론 6페이지의 end값이 30으로 오류가 생긴다. if문으로 해결한다.
-		if(end > totalRecord) {				// 30 > 26일 때 end값을 26으로 바꾼다.
+		if(end > totalRecord) {				    // 30 > 26일 때 end값을 26으로 바꾼다.
 			end = totalRecord;
 		}
 		
 		// totalPage 계산
 		totalPage = totalRecord / recordPerPage; // 여기서 끝내면 나눠서 나머지가 있는애들은 오류가 생긴다.
-												 // ex) 26 ~ 29페이지의 경우.. 이 경우엔 +1을 해주자.
+												                     // ex) 26 ~ 29페이지의 경우.. 이 경우엔 +1을 해주자.
 		if(totalRecord % recordPerPage != 0) {	 // 나눈 나머지가 0이 아니다. (나머지가 생겼다.)
 			totalPage++;
 		}
 		
-		// beginPage, endPage 계산
 		/*
+		  beginPage, endPage 계산
 			totalPage=6, pagePerBlock=4인 상황
 			block(page)	beginPage	endPage
-			1(1~4)		1			4
-			2(5~6)		5			6
+			1(1~4)	    	1   			4
+			2(5~6)		    5	    		6
 		*/
 		
 		beginPage = ((page - 1) / pagePerBlock) * pagePerBlock + 1;
